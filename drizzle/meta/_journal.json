@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1793806217842,
+      "tag": "0000_omniscient_frank_castle",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1793816451958,
+      "tag": "0001_concerned_deathbird",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1793816547456,
+      "tag": "0002_friendly_midnight",
+      "breakpoints": true
+    }
+  ]
+}
