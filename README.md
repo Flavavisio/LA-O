@@ -1,4 +1,4 @@
-# Laço — Sempre por perto. · v0.3
+# Laço — Sempre por perto. · v0.4
 
 Aplicação web em HTML, CSS e JavaScript (React/Vinext), com API JavaScript e base de dados D1. A identidade visual inclui o logótipo corporativo e o ícone da app em PNG.
 
@@ -9,7 +9,7 @@ Aplicação web em HTML, CSS e JavaScript (React/Vinext), com API JavaScript e b
 - Administradores da família: gerir familiares, segundo administrador opcional, máximo de dois administradores, lugares reservados também para contas ainda por associar.
 - Os administradores contam para o número de familiares na licença. A validade é inclusiva até ao fim do dia UTC nesta versão.
 - Todos os acessos são verificados no servidor. O superadmin não recebe localização familiar pelo seu perfil.
-- Identidade através do início de sessão da plataforma Sites. Um e-mail preparado associa-se ao identificador estável do utilizador quando este entra. Não são enviados e-mails de convite.
+- Login por e-mail e palavra-passe com Supabase Auth em `/login`. A API verifica o token no servidor. A identidade Sites existente fica apenas como compatibilidade da pré-visualização privada. Não são enviados convites nesta entrega.
 - Adultos autorizam a própria partilha e podem revogá-la; a revogação elimina a última localização. A ativação e a desativação para menores exigem um administrador adulto responsável.
 - Localização real apenas pelo botão explícito no navegador, com precisão e instante de atualização. Só o próprio membro pode enviar coordenadas.
 - Registo real de SOS e confirmações na base de dados; os painéis abertos consultam atualizações de 15 em 15 segundos. Confirmação do administrador visível ao familiar.
@@ -17,7 +17,9 @@ Aplicação web em HTML, CSS e JavaScript (React/Vinext), com API JavaScript e b
 
 ## Primeiro acesso
 
-A instalação mantém-se privada. Abrir Superadmin e premir “Ativar o meu superadmin” para atribuir o perfil à conta autenticada proprietária. Criar uma família com o e-mail do administrador. Se for o próprio proprietário, entrar em Visão geral e selecionar a família.
+O percurso é `/` → `/login` → `/plataforma`. O mockup com dados fictícios está em `/demonstracao`. As contas têm de existir em Supabase Auth e estar associadas à família no backend; o formulário não cria contas nem atribui perfis.
+
+A instalação publicada anteriormente mantém-se privada e não foi atualizada nesta entrega. O e-mail de bootstrap do superadmin deve ser definido no servidor em `LACO_SUPERADMIN_EMAIL`. Contas normais não podem reclamar a instalação. A migração de famílias, registos e identidades para Supabase aguarda autorização de gestão do projeto. Consulte `docs/ACESSO_E_SUPABASE.md`.
 
 Acesso de outras pessoas depende de configurar uma audiência adequada e o fluxo de autenticação para o lançamento. Não publicar uma instalação sem superadmin configurado. Nesta entrega, a audiência privada fica preservada.
 
@@ -46,3 +48,5 @@ No Android, monitorização parental deve ser transparente. A monitorização fa
 Empacotamento nativo (por exemplo Capacitor), permissões/background location de cada sistema, identidade apropriada às contas familiares, notificações push com confirmação e tentativas adicionais de entrega, associação segura de dispositivos, locais seguros reais, retenção configurável e proteção parental oficial. As partilhas voluntárias de adultos não usam os bloqueios parentais de menores.
 
 A v0.3 torna a partilha do menor exclusivamente controlada pelos administradores: sem interruptor para o menor, com proteção na API para ambos os estados. Consulte `docs/CONTROLO_LOCALIZACAO_MENORES.md` para distinguir este controlo do bloqueio das definições globais do telemóvel.
+
+A v0.4 acrescenta o index em `/`, login Supabase em `/login`, painel autenticado em `/plataforma` e o mockup em `/demonstracao`. O login usa a chave pública fornecida, mas a migração dos dados D1 para Supabase e o aprovisionamento de contas ainda dependem do acesso de gestão. Consulte `docs/ACESSO_E_SUPABASE.md`. Não foi feito deploy.

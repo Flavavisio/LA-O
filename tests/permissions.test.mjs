@@ -69,3 +69,9 @@ test('Minor can neither activate nor deactivate sharing; both administrators can
  await action(db,sc,{type:'consent',family:fa,member:mid,value:true});
  assert.equal((await state(db,ac,fa)).members.find(m=>m.id===mid).consent,1);
 });
+test('Public Supabase sign-in cannot claim an unconfigured superadmin installation',async()=>{
+ const db=database();const c=await context(db,{...user('supabase:ordinary','ordinary@example.com'),canBootstrap:false});
+ assert.equal((await state(db,c)).setup,false);
+ await assert.rejects(action(db,c,{type:'setup'}),{status:403});
+ assert.equal(db.raw.prepare('SELECT COUNT(*) AS n FROM system').get().n,0);
+});
