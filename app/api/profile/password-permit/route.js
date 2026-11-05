@@ -4,11 +4,12 @@ import {getApplicationUser} from '../../../../lib/auth/server';
 import {passwordAccess,signPasswordPermit} from '../../../../lib/auth/password-policy';
 import {supabaseConfig} from '../../../../lib/supabase/config';
 import {context,AppError} from '../../../../lib/service';
+import {assertWriteOrigin} from '../../../../lib/auth/write-origin';
 export const dynamic='force-dynamic';
 const headers={'Cache-Control':'no-store'};
 export async function POST(request){
  try{
-  if(request.headers.get('origin')!==new URL(request.url).origin)throw new AppError('Origem inválida.',403);
+  assertWriteOrigin(request);
   const user=await getApplicationUser(request);
   const c=await context(env.DB,user);
   if(!passwordAccess(c).canChangePassword)throw new AppError('A alteração da palavra-passe está disponível apenas para contas de adultos associadas à Laço.',403);

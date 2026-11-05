@@ -43,3 +43,21 @@ yarn-error.log*
 
 # OS metadata
 .DS_Store
+
+# Native generated assets, caches and signing material
+/mobile/dist/
+/android/.gradle/
+/android/build/
+/android/app/build/
+/android/local.properties
+/android/app/src/main/assets/
+/ios/App/App/public/
+/ios/App/App/capacitor.config.json
+/ios/DerivedData/
+**/google-services.json
+**/GoogleService-Info.plist
+*.jks
+*.keystore
+*.p8
+*.p12
+*.mobileprovision

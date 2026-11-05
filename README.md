@@ -1,6 +1,6 @@
-# Laço — Sempre por perto. · v0.5
+# Laço — Sempre por perto. · v0.6
 
-Aplicação web em HTML, CSS e JavaScript (React/Vinext), com API JavaScript e base de dados D1. A identidade visual inclui o logótipo corporativo e o ícone da app em PNG.
+Aplicação web em HTML, CSS e JavaScript (React/Vinext), com API JavaScript e base de dados D1. Inclui agora a base móvel Capacitor para Android e iPhone, descrita em `docs/APP_MOVEL.md`. A identidade visual inclui o logótipo corporativo e o ícone da app em PNG.
 
 ## Incluído
 
@@ -25,7 +25,7 @@ O percurso de entrada é o index público, seguido do login Laço. As APIs exige
 
 ## Limites desta versão
 
-Não é uma app móvel pronta para emergências. Não inclui localização contínua em segundo plano, push, SMS, chamada automática, deteção de chegada/saída real, cobrança, pairing móvel, proteção contra desinstalação, recuperação independente de conta ou transferência de administrador principal. Não há históricos reais de percurso: conserva-se apenas a última posição até revogar/remover a pessoa. Retenção automática, eliminação integral de conta, exportação e revisão jurídica são trabalho de preparação do lançamento.
+Não é uma app validada para emergências. O código móvel inclui acompanhamento em segundo plano e integração push, mas exige compilar, configurar Firebase/APNs, assinar e testar em dispositivos reais. Não inclui SMS, chamada automática, deteção de chegada/saída real, cobrança, pairing móvel com aprovação do responsável, proteção contra desinstalação, recuperação independente de conta ou transferência de administrador principal. Não há históricos reais de percurso: conserva-se apenas a última posição até revogar/remover a pessoa. Retenção automática, eliminação integral de conta, exportação e revisão jurídica são trabalho de preparação do lançamento.
 
 Os locais seguros e o mapa demonstrativo são apenas dados de exemplo e não geram alertas. Velocidade e bateria na demonstração são fictícias. Não prometer precisão exata, entrega garantida de SOS ou impossibilidade universal de desinstalação.
 

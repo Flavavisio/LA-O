@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `notification_devices_provider_token` ON `notification_devices` (`provider`,`token`);

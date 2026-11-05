@@ -22,6 +22,20 @@
       "when": 1793816547456,
       "tag": "0002_friendly_midnight",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1793873904699,
+      "tag": "0003_lying_annihilus",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1793874407294,
+      "tag": "0004_polite_forgotten_one",
+      "breakpoints": true
     }
   ]
 }

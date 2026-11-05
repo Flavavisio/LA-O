@@ -1,0 +1,70 @@
+name: Compilar Laço móvel
+on:
+  push:
+    branches: [main]
+    paths: ['mobile/**', 'android/**', 'capacitor.config.ts', 'package.json', 'pnpm-lock.yaml', '.github/workflows/mobile-build.yml']
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: Plataforma de teste
+        type: choice
+        options: [android, ios-simulator]
+        default: android
+permissions:
+  contents: read
+jobs:
+  android:
+    if: github.event_name == 'push' || inputs.platform == 'android'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+      - run: npm install --global pnpm@11.25.0
+      - run: pnpm install --frozen-lockfile
+      - run: npm test
+      - name: Configuração Firebase opcional de teste
+        env:
+          LACO_GOOGLE_SERVICES_JSON: ${{ secrets.LACO_GOOGLE_SERVICES_JSON }}
+        run: |
+          python3 - <<'PY'
+          import os,pathlib,json
+          value=os.environ.get('LACO_GOOGLE_SERVICES_JSON','')
+          if value:
+              json.loads(value)
+              pathlib.Path('android/app/google-services.json').write_text(value)
+          PY
+      - run: npm run mobile:sync
+      - run: chmod +x android/gradlew
+      - run: cd android && ./gradlew assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: laco-android-debug
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 7
+  ios-simulator:
+    if: inputs.platform == 'ios-simulator'
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install --global pnpm@11.25.0
+      - run: pnpm install --frozen-lockfile
+      - run: npm test
+      - run: npm run mobile:sync
+      - run: xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -derivedDataPath ios/DerivedData CODE_SIGNING_ALLOWED=NO build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: laco-ios-simulator-unsigned
+          path: ios/DerivedData/Build/Products/Debug-iphonesimulator/App.app
+          retention-days: 7
