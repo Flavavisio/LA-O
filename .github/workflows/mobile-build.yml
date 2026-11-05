@@ -2,7 +2,7 @@ name: Compilar Laço móvel
 on:
   push:
     branches: [main]
-    paths: ['mobile/**', 'android/**', 'capacitor.config.ts', 'package.json', 'pnpm-lock.yaml', '.github/workflows/mobile-build.yml']
+    paths: ['mobile/**', 'android/**', 'ios/**', 'capacitor.config.ts', 'package.json', 'pnpm-lock.yaml', '.github/workflows/mobile-build.yml']
   workflow_dispatch:
     inputs:
       platform:
@@ -52,7 +52,7 @@ jobs:
           path: android/app/build/outputs/apk/debug/app-debug.apk
           retention-days: 7
   ios-simulator:
-    if: inputs.platform == 'ios-simulator'
+    if: github.event_name == 'push' || inputs.platform == 'ios-simulator'
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
@@ -64,7 +64,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: npm test
       - run: npm run mobile:sync
-      - run: xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -derivedDataPath ios/DerivedData CODE_SIGNING_ALLOWED=NO build
+      - run: xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath ios/DerivedData CODE_SIGNING_ALLOWED=NO build
       - uses: actions/upload-artifact@v4
         with:
           name: laco-ios-simulator-unsigned

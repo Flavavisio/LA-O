@@ -49,7 +49,7 @@ Android: usar Android Studio/SDK e JDK 21. Abrir com `npm run mobile:android`, e
 
 iPhone: usar Mac/Xcode, abrir com `npm run mobile:ios`, escolher a equipa e um dispositivo. O projeto usa SPM e deve ser sincronizado depois da instalação de dependências. Um resultado para simulador não é um IPA instalável num iPhone.
 
-O workflow **Compilar Laço móvel** em `.github/workflows/mobile-build.yml` compila Android quando são alterados os ficheiros móveis na main e também permite execução manual (`workflow_dispatch`). Pode produzir um APK debug Android ou, apenas por execução manual, um build de simulador iOS sem assinatura. A compilação Android foi executada com sucesso no GitHub Actions e produziu um APK debug. Isso não substitui o teste físico. Os resultados e artefactos devem ser consultados no GitHub Actions.
+O workflow **Compilar Laço móvel** em `.github/workflows/mobile-build.yml` compila Android e iOS para simulador quando são alterados os ficheiros móveis na main e também permite execução manual (`workflow_dispatch`). Pode produzir um APK debug Android ou um build de simulador iOS sem assinatura. A compilação Android foi executada com sucesso no GitHub Actions e produziu um APK debug. Isso não substitui o teste físico. Os resultados e artefactos devem ser consultados no GitHub Actions.
 
 `npm run mobile:dev` abre a interface no navegador; `?preview` usa um familiar fictício e `?preview=parent` um responsável fictício. Não pede permissões ou envia dados. Não serve para testar segundo plano ou entrega push.
 
