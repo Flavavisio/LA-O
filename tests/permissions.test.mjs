@@ -75,3 +75,12 @@ test('Public Supabase sign-in cannot claim an unconfigured superadmin installati
  await assert.rejects(action(db,c,{type:'setup'}),{status:403});
  assert.equal(db.raw.prepare('SELECT COUNT(*) AS n FROM system').get().n,0);
 });
+
+test('Supabase platform admin comes from the database role and can be replaced',async()=>{
+ const db=database();
+ const first=await context(db,{...root,authProvider:'supabase',platformAdmin:true,canBootstrap:false});assert.equal(first.root,true);assert.equal(first.setup,false);
+ await action(db,first,{type:'create_family',name:'A',admin:'A',email:'a@example.com',seats:3,expires:'2099-12-31'});
+ db.raw.prepare('INSERT INTO system(id,owner) VALUES(1,?)').run(root.userId);
+ const revoked=await context(db,{...root,authProvider:'supabase',platformAdmin:false,canBootstrap:false});assert.equal(revoked.root,false);
+ const replacement=await context(db,{...user('supabase:new','new@example.com'),authProvider:'supabase',platformAdmin:true,canBootstrap:false});assert.equal(replacement.root,true);
+});

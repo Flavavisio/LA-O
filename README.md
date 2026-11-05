@@ -19,7 +19,7 @@ Aplicação web em HTML, CSS e JavaScript (React/Vinext), com API JavaScript e b
 
 O percurso é `/` → `/login` → `/plataforma`. O mockup com dados fictícios está em `/demonstracao`. As contas têm de existir em Supabase Auth e estar associadas à família no backend; o formulário não cria contas nem atribui perfis.
 
-A instalação publicada anteriormente mantém-se privada e não foi atualizada nesta entrega. O e-mail de bootstrap do superadmin deve ser definido no servidor em `LACO_SUPERADMIN_EMAIL`. Contas normais não podem reclamar a instalação. A migração de famílias, registos e identidades para Supabase aguarda autorização de gestão do projeto. Consulte `docs/ACESSO_E_SUPABASE.md`.
+A instalação publicada anteriormente mantém-se privada e não foi atualizada nesta entrega. O superadmin inicial fica reservado na base privada e só é associado a uma conta Auth com e-mail confirmado. Novos superadmins podem ser adicionados/substituídos posteriormente. Contas normais não podem reclamar a instalação. Consulte `docs/SUPERADMIN_INICIAL.md`. A migração de famílias, registos e identidades para Supabase aguarda autorização de gestão do projeto. Consulte `docs/ACESSO_E_SUPABASE.md`.
 
 Acesso de outras pessoas depende de configurar uma audiência adequada e o fluxo de autenticação para o lançamento. Não publicar uma instalação sem superadmin configurado. Nesta entrega, a audiência privada fica preservada.
 
@@ -50,3 +50,6 @@ Empacotamento nativo (por exemplo Capacitor), permissões/background location de
 A v0.3 torna a partilha do menor exclusivamente controlada pelos administradores: sem interruptor para o menor, com proteção na API para ambos os estados. Consulte `docs/CONTROLO_LOCALIZACAO_MENORES.md` para distinguir este controlo do bloqueio das definições globais do telemóvel.
 
 A v0.4 acrescenta o index em `/`, login Supabase em `/login`, painel autenticado em `/plataforma` e o mockup em `/demonstracao`. O login usa a chave pública fornecida, mas a migração dos dados D1 para Supabase e o aprovisionamento de contas ainda dependem do acesso de gestão. Consulte `docs/ACESSO_E_SUPABASE.md`. Não foi feito deploy.
+
+
+O perfil superadmin passa a ser verificado na tabela privada Supabase, através de RPC com autorização. O e-mail inicial está reservado na base, sem conta Auth ativa ainda. A migração dos dados familiares mantém-se pendente.

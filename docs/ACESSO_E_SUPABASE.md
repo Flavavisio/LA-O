@@ -17,9 +17,9 @@ A chave foi testada no endpoint público de configuração de autenticação: HT
 
 ## O que ainda depende de acesso de gestão
 
-A aplicação de gestão v0.3 conserva os registos na base D1 existente. Esta entrega NÃO declara a migração dos registos para Supabase concluída. O projeto Supabase não estava autorizado nas ligações de gestão disponíveis.
+A aplicação de gestão v0.3 conserva os registos na base D1 existente. Esta entrega NÃO declara a migração dos registos para Supabase concluída. O acesso de gestão ao projeto já foi autorizado. As estruturas privadas de superadmin e auditoria foram aplicadas; a migração do domínio familiar ainda está pendente.
 
-É necessário autorizar o projeto no Supabase ligado ao ChatGPT para:
+Após a autorização do projeto, falta concluir:
 
 1. Inspecionar as tabelas e utilizadores existentes.
 2. Criar/migrar famílias, membros, licenças, permissões e telemetria com RLS.
@@ -30,10 +30,11 @@ Autenticar no Supabase, por si só, não atribui uma família ou perfil de admin
 
 ## Superadmin e migração de identidade
 
-No alojamento futuro, definir `LACO_SUPERADMIN_EMAIL` como variável de servidor com o e-mail confirmado do proprietário. Um utilizador normal que se autentique não pode reclamar a instalação como superadmin. Na pré-visualização privada, o e-mail autenticado da plataforma pode identificar o mesmo proprietário.
+A reserva inicial é guardada na tabela privada Supabase e associada apenas após confirmação do endereço pela conta Auth. O backend consulta o papel atual através de RPC; `LACO_SUPERADMIN_EMAIL` deixou de ser utilizado para conceder o perfil no percurso Supabase. O superadmin pode posteriormente acrescentar/substituir outros, com proteção do último administrador ativo. Um utilizador normal não pode reclamar a instalação. Consulte `docs/SUPERADMIN_INICIAL.md`.
 
 Não substituir automaticamente o superadmin atual nem reassociar membros que já tenham um identificador de outro fornecedor. A migração de identidades tem de ser explícita após inspeção dos dados.
 
 ## Publicação
 
 Código preparado para deploy posterior. Nenhum deploy feito nesta entrega. O Site existente continua privado; para um index acessível sem ChatGPT é necessário escolher um alojamento/audiência apropriados na fase de publicação, com o login Supabase e as permissões familiares validados.
+
