@@ -1,5 +1,14 @@
 # Laço móvel — Android e iPhone
 
+## Beta 0.6.2 — mapa do administrador
+
+- Android/iPhone: novo separador «Mapa da família», atalho no início e ação «Ver no mapa» por familiar. Permite escolher uma posição autorizada e consultar a hora, precisão e velocidade da leitura.
+- O mapa OpenStreetMap é carregado por ação explícita; o CSP da app permite frames apenas de `https://www.openstreetmap.org`. Não são necessárias chaves de mapas Google.
+- Sem posições, a app indica o motivo e permite abrir um mapa de Portugal sem marcadores, sem simular a localização de qualquer familiar.
+- No site, o mapa foi colocado antes dos cartões de familiares, com acesso direto no cabeçalho.
+- Só administradores de uma família conseguem obter o mapa de familiares. Posições sem consentimento, inválidas ou ausentes não geram marcadores nem URLs com coordenadas.
+- Versão nativa 0.6.2, build 3. É necessário instalar o novo APK para receber a alteração nativa. A compilação e os testes automatizados não substituem validação num telemóvel real.
+
 ## Beta 0.6.1 — sessão e ligação à nuvem
 
 - Mesmos endpoints de produção: Supabase Auth e API Laço em `https://laco-familia.flowy-mouse-8040.chatgpt.site`. As famílias, SOS e telemetria continuam na base de dados D1 do servidor. O login não significa que toda a base de dados tenha sido migrada para Supabase.
