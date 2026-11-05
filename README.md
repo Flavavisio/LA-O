@@ -1,15 +1,15 @@
-# Laço — Sempre por perto. · v0.4
+# Laço — Sempre por perto. · v0.5
 
 Aplicação web em HTML, CSS e JavaScript (React/Vinext), com API JavaScript e base de dados D1. A identidade visual inclui o logótipo corporativo e o ícone da app em PNG.
 
 ## Incluído
 
 - Painel de demonstração com família fictícia, mapa ilustrativo e vista do familiar.
-- Superadmin: configurar a instalação privada, criar famílias e o administrador principal por e-mail, alterar capacidade/validade e suspender/reativar famílias.
+- Superadmin verificado no Supabase: criar famílias e o administrador principal por e-mail, alterar capacidade/validade e suspender/reativar famílias.
 - Administradores da família: gerir familiares, segundo administrador opcional, máximo de dois administradores, lugares reservados também para contas ainda por associar.
 - Os administradores contam para o número de familiares na licença. A validade é inclusiva até ao fim do dia UTC nesta versão.
 - Todos os acessos são verificados no servidor. O superadmin não recebe localização familiar pelo seu perfil.
-- Login por e-mail e palavra-passe com Supabase Auth em `/login`. A API verifica o token no servidor. A identidade Sites existente fica apenas como compatibilidade da pré-visualização privada. Não são enviados convites nesta entrega.
+- Login por e-mail e palavra-passe com Supabase Auth em `/login`. A API verifica o token no servidor. A identidade do alojamento não concede acesso aos dados da aplicação. Não são enviados convites nesta entrega.
 - Adultos autorizam a própria partilha e podem revogá-la; a revogação elimina a última localização. A ativação e a desativação para menores exigem um administrador adulto responsável.
 - Localização real apenas pelo botão explícito no navegador, com precisão e instante de atualização. Só o próprio membro pode enviar coordenadas.
 - Registo real de SOS e confirmações na base de dados; os painéis abertos consultam atualizações de 15 em 15 segundos. Confirmação do administrador visível ao familiar.
@@ -19,9 +19,9 @@ Aplicação web em HTML, CSS e JavaScript (React/Vinext), com API JavaScript e b
 
 O percurso é `/` → `/login` → `/plataforma`. O mockup com dados fictícios está em `/demonstracao`. As contas têm de existir em Supabase Auth e estar associadas à família no backend; o formulário não cria contas nem atribui perfis.
 
-A instalação publicada anteriormente mantém-se privada e não foi atualizada nesta entrega. O superadmin inicial fica reservado na base privada e só é associado a uma conta Auth com e-mail confirmado. Novos superadmins podem ser adicionados/substituídos posteriormente. Contas normais não podem reclamar a instalação. Consulte `docs/SUPERADMIN_INICIAL.md`. A migração de famílias, registos e identidades para Supabase aguarda autorização de gestão do projeto. Consulte `docs/ACESSO_E_SUPABASE.md`.
+O index publicado é público. A plataforma exige autenticação Laço. O superadmin inicial está associado à conta Auth confirmada, com permissões na base privada do Supabase. Novos superadmins podem ser adicionados/substituídos posteriormente. Contas normais não podem reclamar a instalação. Consulte `docs/SUPERADMIN_INICIAL.md`. Os dados familiares continuam em D1; a migração completa para Supabase permanece pendente. Consulte `docs/ACESSO_E_SUPABASE.md`.
 
-Acesso de outras pessoas depende de configurar uma audiência adequada e o fluxo de autenticação para o lançamento. Não publicar uma instalação sem superadmin configurado. Nesta entrega, a audiência privada fica preservada.
+O percurso de entrada é o index público, seguido do login Laço. As APIs exigem um token Supabase verificado e as permissões atuais. Consulte `docs/PUBLICACAO_INDEX.md`. Adultos podem alterar a sua palavra-passe em `/perfil`; menores ficam bloqueados. Consulte `docs/PERFIL_E_PALAVRA_PASSE.md`.
 
 ## Limites desta versão
 
