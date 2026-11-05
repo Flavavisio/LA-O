@@ -15,3 +15,5 @@
 .person-meta .battery-status{display:flex;margin-top:0;color:inherit}
 
 .managed-sharing{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:#788a6c;flex-shrink:0}
+
+.account-choice{display:flex!important;align-items:center;gap:10px}.account-choice input{width:18px!important;height:18px}.row-actions{flex-wrap:wrap}.modal .account-choice{margin:18px 0}
