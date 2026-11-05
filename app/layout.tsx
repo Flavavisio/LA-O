@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./access.css";
+import "./profile.css";
 
 export const metadata: Metadata = {
   title: "Laço — Sempre por perto",
