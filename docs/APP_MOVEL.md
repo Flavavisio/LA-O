@@ -1,5 +1,14 @@
 # Laço móvel — Android e iPhone
 
+## Beta 0.6.1 — sessão e ligação à nuvem
+
+- Mesmos endpoints de produção: Supabase Auth e API Laço em `https://laco-familia.flowy-mouse-8040.chatgpt.site`. As famílias, SOS e telemetria continuam na base de dados D1 do servidor. O login não significa que toda a base de dados tenha sido migrada para Supabase.
+- O perfil permite ao adulto terminar a sessão apenas neste dispositivo. A limpeza local não depende do GPS, push ou rede; cada operação tem um prazo. Se o servidor não confirmar a revogação, a mensagem distingue isso da sessão removida localmente.
+- A sessão usa armazenamento seguro com marcador persistente de saída e gerações: leituras, respostas HTTP e refreshes de uma conta antiga não podem voltar a preencher a interface nem sobrescrever um novo login. A app não reativa o acompanhamento ao sair/reabrir. Erros ao limpar o armazenamento apresentam uma opção de repetir.
+- O indicador de nuvem mostra a última sincronização confirmada, sem apresentar dados em cache como uma ligação atual quando um pedido falha.
+- A versão nativa é 0.6.1, build 2. O workflow compila Android, simulador iOS e um arquivo iPhone Release sem assinatura. O arquivo `.xcarchive` exige assinatura/provisionamento do proprietário antes da instalação; não é um IPA instalável nem uma publicação no TestFlight.
+- Testes físicos ainda necessários: sair com e sem rede, falha das permissões, fechar/reabrir depois de sair, entrar com outra conta e confirmar que não reaparecem familiares anteriores. Não foram usados dados de login reais nos testes automatizados.
+
 ## O que existe nesta entrega
 
 - App local em HTML/CSS/JavaScript, empacotada com Capacitor 8; projetos nativos `android/` e `ios/` gerados e sincronizados com os cinco plugins.
@@ -49,7 +58,7 @@ Android: usar Android Studio/SDK e JDK 21. Abrir com `npm run mobile:android`, e
 
 iPhone: usar Mac/Xcode, abrir com `npm run mobile:ios`, escolher a equipa e um dispositivo. O projeto usa SPM e deve ser sincronizado depois da instalação de dependências. Um resultado para simulador não é um IPA instalável num iPhone.
 
-O workflow **Compilar Laço móvel** em `.github/workflows/mobile-build.yml` compila Android e iOS para simulador quando são alterados os ficheiros móveis na main e também permite execução manual (`workflow_dispatch`). Pode produzir um APK debug Android ou um build de simulador iOS sem assinatura. A compilação Android foi executada com sucesso no GitHub Actions e produziu um APK debug. Isso não substitui o teste físico. Os resultados e artefactos devem ser consultados no GitHub Actions.
+O workflow **Compilar Laço móvel** em `.github/workflows/mobile-build.yml` compila Android quando são alterados os ficheiros móveis na main e também permite execução manual (`workflow_dispatch`). Pode produzir um APK debug Android e builds iOS sem assinatura para simulador e arquivo de dispositivo. A compilação Android foi executada com sucesso no GitHub Actions e produziu um APK debug. Isso não substitui o teste físico. Os resultados e artefactos devem ser consultados no GitHub Actions.
 
 `npm run mobile:dev` abre a interface no navegador; `?preview` usa um familiar fictício e `?preview=parent` um responsável fictício. Não pede permissões ou envia dados. Não serve para testar segundo plano ou entrega push.
 

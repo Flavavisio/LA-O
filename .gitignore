@@ -61,3 +61,5 @@ yarn-error.log*
 *.p8
 *.p12
 *.mobileprovision
+
+/ios/build/
