@@ -49,13 +49,13 @@ Android: usar Android Studio/SDK e JDK 21. Abrir com `npm run mobile:android`, e
 
 iPhone: usar Mac/Xcode, abrir com `npm run mobile:ios`, escolher a equipa e um dispositivo. O projeto usa SPM e deve ser sincronizado depois da instalação de dependências. Um resultado para simulador não é um IPA instalável num iPhone.
 
-O workflow **Compilar Laço móvel** em `.github/workflows/mobile-build.yml` compila Android quando são alterados os ficheiros móveis na main e também permite execução manual (`workflow_dispatch`). Pode produzir um APK debug Android ou, apenas por execução manual, um build de simulador iOS sem assinatura. Os resultados de compilação devem ser consultados no GitHub Actions.
+O workflow **Compilar Laço móvel** em `.github/workflows/mobile-build.yml` compila Android quando são alterados os ficheiros móveis na main e também permite execução manual (`workflow_dispatch`). Pode produzir um APK debug Android ou, apenas por execução manual, um build de simulador iOS sem assinatura. A compilação Android foi executada com sucesso no GitHub Actions e produziu um APK debug. Isso não substitui o teste físico. Os resultados e artefactos devem ser consultados no GitHub Actions.
 
 `npm run mobile:dev` abre a interface no navegador; `?preview` usa um familiar fictício e `?preview=parent` um responsável fictício. Não pede permissões ou envia dados. Não serve para testar segundo plano ou entrega push.
 
 ## Limites operacionais e validação obrigatória no telefone
 
-Não foi produzido um APK/IPA nesta máquina: o wrapper Android não conseguiu descarregar Gradle (`Network is unreachable`); também não existem SDK Android/JDK 21 completos ou Xcode no ambiente. A compilação do bundle web e a sincronização de plugins não substituem uma compilação Java/Swift nem um teste físico. A pré-visualização visual gerida também não iniciou corretamente neste ambiente; não foi validada no navegador nesta entrega.
+Não foi produzido um APK/IPA nesta máquina local: o wrapper Android não conseguiu descarregar Gradle (`Network is unreachable`); também não existem SDK Android/JDK 21 completos ou Xcode no ambiente. A compilação do bundle web e a sincronização de plugins não substituem uma compilação Java/Swift nem um teste físico. A pré-visualização visual gerida também não iniciou corretamente neste ambiente; não foi validada no navegador nesta entrega.
 
 Antes de distribuir: testar localização com ecrã bloqueado, após cinco minutos em segundo plano, sem rede, depois de revogação/suspensão, com bateria reduzida e após encerramento/reabertura; testar notificações com a app aberta, em segundo plano e terminada; confirmar que os dois administradores certos recebem e que outras famílias não recebem; verificar Android 13+ e ambiente APNs sandbox/produção.
 
